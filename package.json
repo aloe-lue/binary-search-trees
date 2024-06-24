@@ -1,0 +1,15 @@
+{
+  "name": "binary-search-trees",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aloe-lue",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.3.2"
+  }
+}
