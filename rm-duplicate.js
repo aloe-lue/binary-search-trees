@@ -1,5 +1,5 @@
 // only works with sorted array
-const REMOVEDUPLICATE = (array) => {
+const removeDuplicate = (array) => {
   let arr = array;
 
   let i = 1;
@@ -16,4 +16,4 @@ const REMOVEDUPLICATE = (array) => {
   });
 };
 
-export default REMOVEDUPLICATE;
+export default removeDuplicate;
