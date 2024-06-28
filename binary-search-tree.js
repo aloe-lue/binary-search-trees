@@ -14,32 +14,23 @@ const binarySearchTree = () => {
     return TREE.root;
   };
 
-  const insert = (value, bst) => {
-    let BST = bst;
-    const val = value;
-    let prev = null;
-    let Node = node(val);
+  const insert = (value, BST) => {
+    let val = value;
+    let bst = BST;
 
-    if (BST === null) {
-      BST = node;
-      return;
+    if (bst === null) {
+      let Node = node(val);
+      bst = Node;
     }
 
-    while (BST !== null) {
-      prev = BST;
-      if (val > BST.data) {
-        BST = BST.right;
-      } else if (val < BST.data) {
-        BST = BST.left;
-      }
+    if (val > bst.data) {
+      bst.right = insert(val, bst.right);
+    }
+    if (val < bst.data) {
+      bst.left = insert(val, bst.left);
     }
 
-    if (val > prev.data) {
-      prev.right = Node;
-      return;
-    }
-    prev.left = Node;
-    return;
+    return bst;
   };
 
   return {
