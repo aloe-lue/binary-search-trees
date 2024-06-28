@@ -1,43 +1,24 @@
+// implement a recursive insertion method for binary search tree
+
 import node from './node.js';
 
-const insert = (value, bst) => {
-  let BST = bst;
-  const val = value;
-  let prev = null;
+const insert = (value, BST) => {
+  let val = value;
+  let bst = BST;
 
-  while (BST.left !== null && BST.right !== null) {
-    prev = BST;
-    if (val > BST.data) {
-      BST = BST.right;
-    } else {
-      BST = BST.left;
-    }
+  if (bst === null) {
+    let Node = node(val);
+    bst = Node;
   }
 
-  if (val > BST.data) {
-    BST = BST.right;
-
-    if (val > BST.data) {
-      BST.right = node(val);
-    } else {
-      BST.left = node(val);
-    }
-
-    return;
+  if (val > bst.data) {
+    bst.right = insert(val, bst.right);
+  }
+  if (val < bst.data) {
+    bst.left = insert(val, bst.left);
   }
 
-  if (val < BST.data) {
-    BST = BST.left;
-
-    if (val < BST.data) {
-      BST.left = node(val);
-    } else {
-      BST.right = node(val);
-    }
-    return;
-  }
-
-  return;
+  return bst;
 };
 
 export default insert;
