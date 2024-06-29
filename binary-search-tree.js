@@ -33,9 +33,44 @@ const binarySearchTree = () => {
     return bst;
   };
 
+  const bstMinimum = (node) => {
+    let min = node.data;
+    while (node.left !== null) {
+      min = node.left.data;
+      node = node.left;
+    }
+    return min;
+  };
+
+  const deleteItem = (bst, node) => {
+    if (bst === null) {
+      return bst;
+    }
+
+    if (node > bst.data) {
+      bst.right = deleteItem(bst.right, node);
+    }
+    if (node < bst.data) {
+      bst.left = deleteItem(bst.left, node);
+    }
+
+    if (bst.right === null) {
+      return bst.left;
+    }
+    if (bst.left === null) {
+      return bst.right;
+    } else {
+      bst.data = bstMinimum(bst.right);
+
+      bst.right = deleteItem(bst.right, bst.data);
+    }
+    return bst;
+  };
+
   return {
     buildTree,
     insert,
+    deleteItem,
   };
 };
 
