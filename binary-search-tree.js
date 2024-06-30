@@ -49,20 +49,19 @@ const binarySearchTree = () => {
 
     if (node > bst.data) {
       bst.right = deleteItem(bst.right, node);
-    }
-    if (node < bst.data) {
+    } else if (node < bst.data) {
       bst.left = deleteItem(bst.left, node);
-    }
-
-    if (bst.right === null) {
-      return bst.left;
-    }
-    if (bst.left === null) {
-      return bst.right;
     } else {
-      bst.data = bstMinimum(bst.right);
+      if (bst.right === null) {
+        return bst.left;
+      }
+      if (bst.left === null) {
+        return bst.right;
+      } else {
+        bst.data = bstMinimum(bst.right);
 
-      bst.right = deleteItem(bst.right, bst.data);
+        bst.right = deleteItem(bst.right, bst.data);
+      }
     }
     return bst;
   };
