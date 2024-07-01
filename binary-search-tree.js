@@ -65,10 +65,33 @@ const binarySearchTree = () => {
     return bst;
   };
 
+  const find = (BST, VALUE) => {
+    let bst = BST,
+      value = VALUE,
+      previous = null;
+
+    if (bst === null || bst.data === value) {
+      return bst;
+    }
+
+    if (value > bst.data) {
+      bst.right = findRec(bst.right, value);
+      previous = bst.right;
+    }
+
+    if (value < bst.data) {
+      bst.left = findRec(bst.left, value);
+      previous = bst.left;
+    }
+
+    return previous;
+  };
+
   return {
     buildTree,
     insert,
     deleteItem,
+    find,
   };
 };
 
