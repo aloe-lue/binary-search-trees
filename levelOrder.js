@@ -1,28 +1,34 @@
+/**
+ * @param { Object } BST
+ * @returns Array
+ */
+
 const levelOrder = (BST) => {
   let bst = BST;
   let arr = [];
   let q = [];
   q.push(bst);
 
-  if (q[0].left !== null) {
-    q.push(q[0].left);
-  }
-  if (q[0].right !== null) {
-    q.push(q[0].right);
-  }
-  arr.push(q.shift().data);
-
   while (q.length !== 0) {
-    if (q[0].left !== null) {
-      q.push(q[0].left);
-    }
-    if (q[0].right !== null) {
-      q.push(q[0].right);
-    }
+    const frontQ = q.at(0);
+
+    if (frontQ.left !== null) q.push(frontQ.left);
+    if (frontQ.right !== null) q.push(frontQ.right);
+
     arr.push(q.shift().data);
   }
 
   return arr;
 };
 
-export default levelOrder;
+/**
+ * ? the level order traverse the binary search tree while the callback function is provided with node
+ * @param { Object } BST
+ * @returns
+ */
+
+const queue = (BST) => {};
+
+const levelOrderWithCb = (callback, BST) => {};
+
+export { levelOrder, queue, levelOrderWithCb };
