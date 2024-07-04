@@ -21,14 +21,23 @@ const levelOrder = (BST) => {
   return arr;
 };
 
-/**
- * ? the level order traverse the binary search tree while the callback function is provided with node
- * @param { Object } BST
- * @returns
- */
+const levelOrderRec = (BST, q = []) => {
+  let bst = BST;
+  let array = [];
 
-const queue = (BST) => {};
+  if (bst.left !== null) {
+    q.push(bst.left);
+  }
 
-const levelOrderWithCb = (callback, BST) => {};
+  if (bst.right !== null) {
+    q.push(bst.right);
+  }
 
-export { levelOrder, queue, levelOrderWithCb };
+  if (q.length === 0) {
+    return [bst.data];
+  }
+
+  return array.concat(bst.data).concat(levelOrderRec(q.shift(), q));
+};
+
+export { levelOrder, levelOrderRec };
