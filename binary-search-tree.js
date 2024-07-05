@@ -80,11 +80,31 @@ const binarySearchTree = () => {
     return find(bst.left, value);
   };
 
+  const levelOrder = (BST, q = []) => {
+    let bst = BST;
+    let array = [];
+
+    if (bst.left !== null) {
+      q.push(bst.left);
+    }
+
+    if (bst.right !== null) {
+      q.push(bst.right);
+    }
+
+    if (q.length === 0) {
+      return [bst.data];
+    }
+
+    return array.concat(bst.data).concat(levelOrder(q.shift(), q));
+  };
+
   return {
     buildTree,
     insert,
     deleteItem,
     find,
+    levelOrder,
   };
 };
 
