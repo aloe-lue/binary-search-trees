@@ -14,6 +14,12 @@ const binarySearchTree = () => {
     return TREE.root;
   };
 
+  /**
+   *  todo: don't insert node when node already exists.
+   * @param { tree.root } BST
+   * @param { integer } value
+   * @returns
+   */
   const insert = (BST, value) => {
     let val = value;
     let bst = BST;
@@ -144,6 +150,23 @@ const binarySearchTree = () => {
       .filter((item) => item !== null);
   };
 
+  const max = (x, y) => {
+    let left = x;
+    let right = y;
+
+    return left > right ? left : right;
+  };
+
+  const height = (node) => {
+    const nd = node;
+
+    if (nd === null) {
+      return -1;
+    }
+
+    return max(height(nd.left), height(nd.right)) + 1;
+  };
+
   return {
     buildTree,
     insert,
@@ -153,6 +176,12 @@ const binarySearchTree = () => {
     preOrder,
     inOrder,
     postOrder,
+    height,
+    /**
+     * depth,
+     * isbalanced,
+     * rebalance,
+     */
   };
 };
 
