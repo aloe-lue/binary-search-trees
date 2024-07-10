@@ -1,20 +1,3 @@
-const max = (x, y) => {
-  let left = x;
-  let right = y;
-
-  return left > right ? left : right;
-};
-
-const heightRec = (node) => {
-  const nd = node;
-
-  if (nd === null) {
-    return -1;
-  }
-
-  return max(height(nd.left), height(nd.right)) + 1;
-};
-
 /**
  * now do it with iteration ->
  *  since it's night i can't go on with this i have to look for my health
@@ -27,4 +10,35 @@ const heightRec = (node) => {
  *  repeat
  */
 
-export default heightRec;
+const height = (node) => {
+  let nd = node;
+  let totalHeight = -1;
+
+  if (nd === null) {
+    return totalHeight++;
+  }
+
+  let q = [];
+  q.push(nd);
+
+  while (1 == 1) {
+    let nodeCount = q.length;
+
+    if (nodeCount === 0) {
+      return totalHeight;
+    }
+    totalHeight++;
+
+    while (nodeCount > 0) {
+      let front = q.shift();
+
+      if (front.left !== null) q.push(front.left);
+      if (front.right !== null) q.push(front.right);
+      nodeCount--;
+    }
+  }
+
+  return totalHeight;
+};
+
+export default height;
