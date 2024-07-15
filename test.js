@@ -1,19 +1,54 @@
-import mergeSort from './merge-sort.js';
-import removeDuplicate from './rm-duplicate.js';
-import node from './node.js';
-import tree from './tree.js';
-import buildTree from './build-tree.js';
+import binarySearchTree from './binary-search-tree.js';
 import prettyPrint from './pretty-print.js';
+import randomNumbers from './random-numbers.js';
 
-const testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const sortTestArray = mergeSort(testArray, 0, testArray.length - 1);
-const rmDpSortedTestArray = removeDuplicate(sortTestArray);
-const buildSortedRemovedDuplicateArray = buildTree(
-  rmDpSortedTestArray,
-  0,
-  rmDpSortedTestArray.length - 1,
+const bst = binarySearchTree();
+let arrOfRandomNum = randomNumbers(100);
+let tree = bst.buildTree(arrOfRandomNum, 0, arrOfRandomNum.length - 1);
+
+const giveOneHundoOfArrNum = () => {
+  let arr = randomNumbers(100);
+
+  for (let i = 0; i < arr.length; i++) {
+    let element = arr[i];
+    bst.insert(tree, element);
+  }
+
+  return arr;
+};
+
+let newTree = null;
+
+console.log(
+  '\n confirm that the tree is balanced \n',
+  bst.isBalanced(tree) !== -1,
+
+  '\n',
+  '\n print out element in pre in and post orders',
+  bst.preOrder(tree),
+  bst.inOrder(tree),
+  bst.postOrder(tree),
+  '\n',
+
+  '\n unbalanced the tree by giving several numbers\n',
+  giveOneHundoOfArrNum(),
+  '\n',
+
+  '\n confirm that the tree is unbalanced\n',
+  bst.isBalanced(tree) !== -1,
+
+  '\n',
+
+  `\n balance the tree by calling rebalance`,
+  (newTree = bst.rebalance(tree)),
+  '\n',
+
+  `\n confirm that the tree is balanced \n`,
+  bst.isBalanced(newTree) !== -1,
+  '\n',
+
+  `\n print all items in pre in and post order`,
+  bst.preOrder(tree),
+  bst.inOrder(tree),
+  bst.postOrder(tree),
 );
-
-const sampleArr = [1, 2, 3, 4];
-
-console.log(prettyPrint(buildSortedRemovedDuplicateArray));
