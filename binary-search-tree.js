@@ -15,8 +15,8 @@ const binarySearchTree = () => {
   };
 
   const insert = (BST, value) => {
-    let val = value;
     let bst = BST;
+    let val = value;
 
     if (bst === null) {
       bst = node(val);
@@ -29,7 +29,7 @@ const binarySearchTree = () => {
       bst.left = insert(bst.left, val);
     }
 
-    return bst;
+    return BST;
   };
 
   const bstMinimum = (node) => {
@@ -218,31 +218,29 @@ const binarySearchTree = () => {
     return totalDepth;
   };
 
+  const isBalanced = (node) => {
+    let tree = node;
 
-const isBalanced = (node) => {
-  let tree = node;
+    if (tree === null) {
+      return 0;
+    }
 
-  if (tree === null) {
-    return 0;
+    let leftHeight = isBalanced(tree.left);
+    if (leftHeight === -1) {
+      return -1;
+    }
+
+    let rightHeight = isBalanced(tree.right);
+    if (rightHeight === -1) {
+      return -1;
+    }
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return -1;
+    }
+
+    return Math.max(leftHeight - rightHeight) + 1;
   };
-
-  let leftHeight = isBalanced(tree.left);
-  if (leftHeight === -1) {
-    return -1;
-  }
-
-  let rightHeight = isBalanced(tree.right);
-  if (rightHeight === -1) {
-    return -1;
-  }
-
-  if (Math.abs(leftHeight - rightHeight) === -1) {
-    return -1;
-  }
-
-  return Math.max(leftHeight - rightHeight) + 1;
-};
-
 
   const rebalance = (tree) => {
     let node = tree;
