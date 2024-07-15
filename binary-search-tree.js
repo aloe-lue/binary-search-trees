@@ -263,7 +263,7 @@ const isBalanced = (node) => {
     postOrder,
     height,
     depth,
-    isbalanced,
+    isBalanced,
     rebalance,
   };
 };
