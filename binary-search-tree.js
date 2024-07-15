@@ -14,12 +14,6 @@ const binarySearchTree = () => {
     return TREE.root;
   };
 
-  /**
-   *  todo: don't insert node when node already exists.
-   * @param { tree.root } BST
-   * @param { integer } value
-   * @returns
-   */
   const insert = (BST, value) => {
     let val = value;
     let bst = BST;
@@ -150,21 +144,112 @@ const binarySearchTree = () => {
       .filter((item) => item !== null);
   };
 
-  const max = (x, y) => {
-    let left = x;
-    let right = y;
+  const height = (tree, number) => {
+    let node = tree;
+    let num = number;
 
-    return left > right ? left : right;
-  };
+    let queue = [];
+    let level = 0;
 
-  const height = (node) => {
-    const nd = node;
+    let totalHeight = -1;
+    let depth = -1;
 
-    if (nd === null) {
-      return -1;
+    queue.push(node);
+
+    while (queue.length > 0) {
+      let queueSize = queue.length;
+
+      for (let i = 0; i < queueSize; i++) {
+        let front = queue.shift();
+
+        if (front.data === num) {
+          depth = level;
+        }
+
+        if (front.left !== null) {
+          queue.push(front.left);
+        }
+        if (front.right !== null) {
+          queue.push(front.right);
+        }
+      }
+      level++;
     }
 
-    return max(height(nd.left), height(nd.right)) + 1;
+    totalHeight = level - depth - 1;
+
+    return totalHeight;
+  };
+
+  const depth = (tree, number) => {
+    let node = tree;
+    let num = number;
+
+    let queue = [];
+    let level = 0;
+
+    let height = -1;
+    let totalDepth = -1;
+
+    queue.push(node);
+
+    while (queue.length > 0) {
+      let queueSize = queue.length;
+
+      for (let i = 0; i < queueSize; i++) {
+        let front = queue.shift();
+
+        if (front.data === num) {
+          totalDepth = level;
+        }
+
+        if (front.left !== null) {
+          queue.push(front.left);
+        }
+        if (front.right !== null) {
+          queue.push(front.right);
+        }
+      }
+      level++;
+    }
+
+    height = level - totalDepth - 1;
+
+    return totalDepth;
+  };
+
+
+const isBalanced = (node) => {
+  let tree = node;
+
+  if (tree === null) {
+    return 0;
+  };
+
+  let leftHeight = isBalanced(tree.left);
+  if (leftHeight === -1) {
+    return -1;
+  }
+
+  let rightHeight = isBalanced(tree.right);
+  if (rightHeight === -1) {
+    return -1;
+  }
+
+  if (Math.abs(leftHeight - rightHeight) === -1) {
+    return -1;
+  }
+
+  return Math.max(leftHeight - rightHeight) + 1;
+};
+
+
+  const rebalance = (tree) => {
+    let node = tree;
+    let array = inOrder(node);
+
+    const newTree = buildTree(array, 0, array.length - 1);
+    return newTree;
   };
 
   return {
@@ -177,11 +262,9 @@ const binarySearchTree = () => {
     inOrder,
     postOrder,
     height,
-    /**
-     * depth,
-     * isbalanced,
-     * rebalance,
-     */
+    depth,
+    isbalanced,
+    rebalance,
   };
 };
 
